@@ -1,0 +1,14 @@
+services:
+  caddy:
+    image: ghcr.io/chrisstayte/caddy-cloudflare:latest
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./caddy_data:/data
+      - ./caddy_config:/config
+    environment:
+      - CLOUDFLARE_API_TOKEN=your_token_here
